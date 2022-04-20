@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Wafer.Uwp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Wafer.Uwp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

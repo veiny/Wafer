@@ -1,7 +1,7 @@
-﻿<Application x:Class="Wafer.WPF.App"
+﻿<Application x:Class="Wafer.Wpf.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Wafer.WPF"
+             xmlns:local="clr-namespace:Wafer.Wpf"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
