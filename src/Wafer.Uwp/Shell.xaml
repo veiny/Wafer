@@ -68,6 +68,7 @@
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
+            <!--frame content-->
             <NavigationView.Content>
                 <Frame x:Name="NavigationFrame"/>
             </NavigationView.Content>

@@ -28,10 +28,10 @@ public sealed partial class Shell : UserControl
 
     private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
     {
-        //if (NavigationItems.FirstOrDefault(item => item.Item == args.InvokedItemContainer).PageType is Type typepage)
-        //{
-        //    NavigationFrame.Navigate(typepage);
-        //}
+        if (NavigationItems.FirstOrDefault(item => item.Item == args.InvokedItemContainer).PageType is Type typepage)
+        {
+            NavigationFrame.Navigate(typepage);
+        }
     }
 }
 /// <summary>

@@ -41,6 +41,10 @@ public partial class App : Application
         m_window.Content = new Shell();
         m_window.Activate();
     }
+    public void xxx()
+    {
+        
+    }
 
     private Window m_window;
 }
