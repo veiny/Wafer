@@ -14,9 +14,9 @@
         </Grid.RowDefinitions>
         <TextBlock Text="{Binding Title}" Style="{ThemeResource TitleTextBlockStyle}" />
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button x:Name="btn_addcurrency" Click="btn_addcurrency_Click" Content="新增" Style="{StaticResource AccentButtonStyle}" />
+            <Button x:Name="btn_addcurrency" Click="btn_addcurrency_Click" Content="新增" Style="{ThemeResource AccentButtonStyle}"/>
         </StackPanel>
-        <Grid Grid.Row="2" HorizontalAlignment="Left">
+        <Grid Grid.Row="2">
             <controls:DataGrid x:Name="dataGrid"
                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                AlternatingRowBackground="Transparent" AlternatingRowForeground="Gray"
@@ -24,7 +24,7 @@
                                AutoGenerateColumns="False" CanUserReorderColumns="True"
                                CanUserResizeColumns="True" CanUserSortColumns="False"
                                ColumnHeaderHeight="32" FrozenColumnCount="0"
-                               GridLinesVisibility="Horizontal" HeadersVisibility="Column"
+                               GridLinesVisibility="Vertical" HeadersVisibility="Column"
                                HorizontalScrollBarVisibility="Visible" IsReadOnly="True"
                                ItemsSource="{Binding Currencies}" MaxColumnWidth="400"
                                RowGroupHeaderPropertyNameAlternative="Range" SelectionMode="Extended"
