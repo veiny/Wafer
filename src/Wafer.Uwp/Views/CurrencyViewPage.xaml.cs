@@ -12,14 +12,17 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-namespace Wafer.Uwp;
+using Wafer.Core;
+namespace Wafer.Uwp.Views;
+
 /// <summary>
-/// An empty window that can be used on its own or navigated to within a Frame.
+/// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class MainWindow : Window
+public sealed partial class CurrencyViewPage : Page
 {
-    public MainWindow()
+    public CurrencyViewPage()
     {
         this.InitializeComponent();
+        DataContext = new CurrencyViewModel();
     }
 }

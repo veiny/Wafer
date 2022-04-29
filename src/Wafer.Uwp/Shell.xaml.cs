@@ -22,7 +22,8 @@ public sealed partial class Shell : UserControl
     {
         this.InitializeComponent();
         NavigationItems = new[] {
-        new ItemEntry(IndexItem,typeof(IndexViewPage),"index")
+        new ItemEntry(IndexItem,typeof(IndexViewPage),"index"),
+        new ItemEntry(CurrencyItem,typeof(CurrencyViewPage),"Currency")
         };
     }
 

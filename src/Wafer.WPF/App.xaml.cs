@@ -13,5 +13,10 @@ namespace Wafer.Wpf
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            Window window = new Window() { Title = "Wafer wpf" };
+            window.Show();
+        }
     }
 }

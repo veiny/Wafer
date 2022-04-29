@@ -2,7 +2,7 @@
     x:Class="Wafer.Uwp.Shell"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Wafer.Uwp"
+    xmlns:local="using:Wafer.Uwp" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -52,12 +52,12 @@
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
                 <!--设置-->
-                <NavigationViewItem x:Name="SettingsItem" Content="设置" Icon="Repair">
+                <NavigationViewItem x:Name="SettingsItem" Content="设置" Icon="Repair" IsExpanded="True">
                     <NavigationViewItem.MenuItems>
                         <NavigationViewItem Content="账套" Icon="Paste"/>
                         <NavigationViewItem Content="科目" Icon="Clock"/>
                         <NavigationViewItem Content="期初" Icon="ContactPresence"/>
-                        <NavigationViewItem Content="币别" Icon="Crop"/>
+                        <NavigationViewItem x:Name="CurrencyItem" Content="币别" Icon="Crop"/>
                         <NavigationViewItem Content="凭证字" Icon="FontSize"/>
                         <NavigationViewItem Content="辅助核算" Icon="Shop"/>
                         <NavigationViewItem Content="凭证模板" Icon="SetLockScreen"/>

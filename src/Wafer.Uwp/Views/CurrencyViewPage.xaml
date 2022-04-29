@@ -1,0 +1,76 @@
+﻿<Page
+    x:Class="Wafer.Uwp.Views.CurrencyViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Wafer.Uwp.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:core="using:Wafer.Core" d:DataContext="{d:DesignInstance Type=core:CurrencyViewModel}"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <!--title-->
+            <RowDefinition Height="35"/>
+            <!--bar-->
+            <RowDefinition />
+            <!--content-->
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding Title}" />
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button Content="新增" />
+        </StackPanel>
+        <Grid Grid.Row="2" HorizontalAlignment="Left">
+            <GridView ItemsSource="{Binding Currencies}">
+                <GridView.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <Grid Margin="10,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="300"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="编码" FontWeight="Bold" Style="{StaticResource BaseTextBlockStyle}"/>
+                                <TextBlock Grid.Column="1" Text="名称" FontWeight="Bold" TextWrapping="NoWrap" Style="{StaticResource BodyTextBlockStyle}" />
+                                <TextBlock Grid.Column="2" Text="汇率" FontWeight="Bold" TextWrapping="NoWrap" Style="{StaticResource BodyTextBlockStyle}"/>
+                                <TextBlock Grid.Column="3" Text="是否本币位" FontWeight="Bold" Style="{StaticResource BodyTextBlockStyle}"/>
+                                <TextBlock Grid.Column="4" Text="备注" FontWeight="Bold" TextWrapping="NoWrap" Style="{StaticResource BodyTextBlockStyle}"/>
+                            </Grid>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Gray" HorizontalAlignment="Stretch" Height="5"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.HeaderTemplate>
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="10,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="300"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding CurrencyCode}" FontWeight="Bold" Style="{StaticResource BaseTextBlockStyle}"/>
+                            <TextBlock Grid.Column="1" Text="{Binding CurrencyName}" TextWrapping="NoWrap" Style="{StaticResource BodyTextBlockStyle}" />
+                            <TextBlock Grid.Column="2" Text="{Binding Rate}" TextWrapping="NoWrap" Style="{StaticResource BodyTextBlockStyle}"/>
+                            <CheckBox Grid.Column="3" Content="本币位" IsChecked="{Binding Basecurrency}" IsEnabled="False"/>
+                            <TextBlock Grid.Column="4" Text="{Binding CurrencyDescription}" TextWrapping="NoWrap" Style="{StaticResource BodyTextBlockStyle}"/>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+            </GridView>
+        </Grid>
+    </Grid>
+</Page>
+
+        
+    
