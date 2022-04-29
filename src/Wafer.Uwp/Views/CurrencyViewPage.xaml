@@ -1,76 +1,89 @@
-﻿<Page
-    x:Class="Wafer.Uwp.Views.CurrencyViewPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="using:Wafer.Uwp.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:core="using:Wafer.Core" d:DataContext="{d:DesignInstance Type=core:CurrencyViewModel}"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <Grid>
+﻿<Page x:Class="Wafer.Uwp.Views.CurrencyViewPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:entity="using:Wafer.Entity"
+      xmlns:local="using:Wafer.Uwp.Views" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Margin="{StaticResource FlyoutContentThemePadding}">
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <!--title-->
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="65"/>
             <!--bar-->
             <RowDefinition />
             <!--content-->
         </Grid.RowDefinitions>
-        <TextBlock Text="{Binding Title}" />
+        <TextBlock Text="{Binding Title}" Style="{ThemeResource TitleTextBlockStyle}" />
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button Content="新增" />
+            <Button x:Name="btn_addcurrency" Click="btn_addcurrency_Click" Content="新增" Style="{StaticResource AccentButtonStyle}" />
         </StackPanel>
         <Grid Grid.Row="2" HorizontalAlignment="Left">
-            <GridView ItemsSource="{Binding Currencies}">
-                <GridView.HeaderTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <Grid Margin="10,0,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="300"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="编码" FontWeight="Bold" Style="{StaticResource BaseTextBlockStyle}"/>
-                                <TextBlock Grid.Column="1" Text="名称" FontWeight="Bold" TextWrapping="NoWrap" Style="{StaticResource BodyTextBlockStyle}" />
-                                <TextBlock Grid.Column="2" Text="汇率" FontWeight="Bold" TextWrapping="NoWrap" Style="{StaticResource BodyTextBlockStyle}"/>
-                                <TextBlock Grid.Column="3" Text="是否本币位" FontWeight="Bold" Style="{StaticResource BodyTextBlockStyle}"/>
-                                <TextBlock Grid.Column="4" Text="备注" FontWeight="Bold" TextWrapping="NoWrap" Style="{StaticResource BodyTextBlockStyle}"/>
-                            </Grid>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Gray" HorizontalAlignment="Stretch" Height="5"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </GridView.HeaderTemplate>
-                <GridView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="10,0,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="300"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding CurrencyCode}" FontWeight="Bold" Style="{StaticResource BaseTextBlockStyle}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding CurrencyName}" TextWrapping="NoWrap" Style="{StaticResource BodyTextBlockStyle}" />
-                            <TextBlock Grid.Column="2" Text="{Binding Rate}" TextWrapping="NoWrap" Style="{StaticResource BodyTextBlockStyle}"/>
-                            <CheckBox Grid.Column="3" Content="本币位" IsChecked="{Binding Basecurrency}" IsEnabled="False"/>
-                            <TextBlock Grid.Column="4" Text="{Binding CurrencyDescription}" TextWrapping="NoWrap" Style="{StaticResource BodyTextBlockStyle}"/>
-                        </Grid>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
-                <GridView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </GridView.ItemsPanel>
-            </GridView>
+            <controls:DataGrid x:Name="dataGrid"
+                               HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                               AlternatingRowBackground="Transparent" AlternatingRowForeground="Gray"
+                               AreRowDetailsFrozen="False" AreRowGroupHeadersFrozen="True"
+                               AutoGenerateColumns="False" CanUserReorderColumns="True"
+                               CanUserResizeColumns="True" CanUserSortColumns="False"
+                               ColumnHeaderHeight="32" FrozenColumnCount="0"
+                               GridLinesVisibility="Horizontal" HeadersVisibility="Column"
+                               HorizontalScrollBarVisibility="Visible" IsReadOnly="True"
+                               ItemsSource="{Binding Currencies}" MaxColumnWidth="400"
+                               RowGroupHeaderPropertyNameAlternative="Range" SelectionMode="Extended"
+                               VerticalScrollBarVisibility="Visible">
+                <controls:DataGrid.Columns>
+                    <controls:DataGridTextColumn Binding="{Binding CurrencyCode}" Header="编码" Tag="编码" />
+                    <controls:DataGridTextColumn Binding="{Binding CurrencyName}" Header="名称" Tag="名称" />
+                    <controls:DataGridTextColumn Binding="{Binding Rate}" Header="汇率" Tag="汇率" />
+                    <controls:DataGridCheckBoxColumn Binding="{Binding Basecurrency}" Header="本币位" IsReadOnly="True" Tag="本币位" />
+                    <controls:DataGridTextColumn Binding="{Binding CurrencyDescription}" Header="备注" Tag="备注" />
+                    <controls:DataGridTemplateColumn Header="操作" Tag="操作">
+                        <controls:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <HyperlinkButton Content="编辑"/>
+                                    <HyperlinkButton Content="删除"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </controls:DataGridTemplateColumn.CellTemplate>
+                    </controls:DataGridTemplateColumn>
+                </controls:DataGrid.Columns>
+            </controls:DataGrid>
         </Grid>
+        <!--content dialog-->
+        <ContentDialog x:Name="AddContentDialog" PrimaryButtonText="保存" SecondaryButtonText="取消" Title="增加币别">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="300" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalTextAlignment="Left">
+                    <Run Foreground="Red" Text="*" />
+                    <Run Text="币别:" />
+                </TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalTextAlignment="Left">
+                    <Run Foreground="Red" Text="*" />
+                    <Run Text="名称:" />
+                </TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalTextAlignment="Left">
+                    <Run Foreground="Red" Text="*" />
+                    <Run Text="汇率:" />
+                </TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalTextAlignment="Left">
+                    <Run Foreground="Transparent" Text="*" />
+                    <Run Text="备注:" />
+                </TextBlock>
+                <!--textbox-->
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" PlaceholderText="示例: USD" />
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" PlaceholderText="示例: 美元" />
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="5" PlaceholderText="示例: 6.8000" />
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="5" PlaceholderText="示例:以美元决算" />
+            </Grid>
+        </ContentDialog>
     </Grid>
-</Page>
 
-        
-    
+</Page>

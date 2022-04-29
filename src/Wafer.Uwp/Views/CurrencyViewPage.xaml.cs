@@ -25,4 +25,6 @@ public sealed partial class CurrencyViewPage : Page
         this.InitializeComponent();
         DataContext = new CurrencyViewModel();
     }
+
+    private async void btn_addcurrency_Click(object sender, RoutedEventArgs e) => await this.AddContentDialog.ShowAsync();
 }

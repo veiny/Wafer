@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Wafer.Entity;
 namespace Wafer.Core;
 public class CurrencyViewModel : ObservableObject
@@ -20,5 +20,4 @@ public class CurrencyViewModel : ObservableObject
     private ICollection<Currency>? currencies;
     public string? Title { get => title; set => SetProperty(ref title, value); }
     public ICollection<Currency> Currencies { get => currencies ?? (currencies = new ObservableCollection<Currency>()); set => SetProperty(ref currencies, value); }
-
 }
