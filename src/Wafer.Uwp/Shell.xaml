@@ -73,5 +73,6 @@
                 <Frame x:Name="NavigationFrame"/>
             </NavigationView.Content>
         </NavigationView>
+        <ContentDialog x:Name="maindialog" CloseButtonText="Close"/>
     </Grid>
 </UserControl>

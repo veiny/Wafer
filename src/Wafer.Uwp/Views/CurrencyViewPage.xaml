@@ -3,6 +3,17 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:entity="using:Wafer.Entity"
       xmlns:local="using:Wafer.Uwp.Views" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="controls:DataGridCell">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Grid Margin="{StaticResource FlyoutContentThemePadding}">
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
@@ -14,7 +25,9 @@
         </Grid.RowDefinitions>
         <TextBlock Text="{Binding Title}" Style="{ThemeResource TitleTextBlockStyle}" />
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button x:Name="btn_addcurrency" Click="btn_addcurrency_Click" Content="新增" Style="{ThemeResource AccentButtonStyle}"/>
+            <CommandBar Background="Transparent" DefaultLabelPosition="Right">
+                <AppBarButton x:Name="btn_addcurrency" Click="btn_addcurrency_Click" Label="新增" Icon="Add"/>
+            </CommandBar>
         </StackPanel>
         <Grid Grid.Row="2">
             <controls:DataGrid x:Name="dataGrid"
@@ -23,8 +36,8 @@
                                AreRowDetailsFrozen="False" AreRowGroupHeadersFrozen="True"
                                AutoGenerateColumns="False" CanUserReorderColumns="True"
                                CanUserResizeColumns="True" CanUserSortColumns="False"
-                               ColumnHeaderHeight="32" FrozenColumnCount="0"
-                               GridLinesVisibility="Vertical" HeadersVisibility="Column"
+                               ColumnHeaderHeight="35" FrozenColumnCount="0"
+                               GridLinesVisibility="Horizontal" HeadersVisibility="Column"
                                HorizontalScrollBarVisibility="Visible" IsReadOnly="True"
                                ItemsSource="{Binding Currencies}" MaxColumnWidth="400"
                                RowGroupHeaderPropertyNameAlternative="Range" SelectionMode="Extended"
@@ -38,17 +51,17 @@
                     <controls:DataGridTemplateColumn Header="操作" Tag="操作">
                         <controls:DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <HyperlinkButton Content="编辑"/>
-                                    <HyperlinkButton Content="删除"/>
-                                </StackPanel>
+                                <CommandBar Background="Transparent" DefaultLabelPosition="Collapsed" HorizontalAlignment="Left">
+                                    <AppBarButton Icon="Edit" ToolTipService.ToolTip="修改"/>
+                                    <AppBarButton Icon="Delete" ToolTipService.ToolTip="删除"/>
+                                </CommandBar>
                             </DataTemplate>
                         </controls:DataGridTemplateColumn.CellTemplate>
                     </controls:DataGridTemplateColumn>
                 </controls:DataGrid.Columns>
             </controls:DataGrid>
         </Grid>
-        <!--content dialog-->
+        <!--add dialog-->
         <ContentDialog x:Name="AddContentDialog" PrimaryButtonText="保存" SecondaryButtonText="取消" Title="增加币别">
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>

@@ -27,11 +27,17 @@ public sealed partial class Shell : UserControl
         };
     }
 
-    private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+    private  async void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
     {
-        if (NavigationItems.FirstOrDefault(item => item.Item == args.InvokedItemContainer).PageType is Type typepage)
+        if (NavigationItems.FirstOrDefault(item => item.Item == args.InvokedItemContainer) is ItemEntry entity)
         {
-            NavigationFrame.Navigate(typepage);
+            NavigationFrame.Navigate(entity.PageType);
+        }
+        else
+        {
+            maindialog.Title = "Errors";
+            maindialog.Content = args.InvokedItemContainer.Content+" is no actions";
+            await maindialog.ShowAsync();
         }
     }
 }
