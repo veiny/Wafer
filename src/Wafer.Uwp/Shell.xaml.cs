@@ -13,6 +13,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Wafer.Uwp.Views;
+using System.Threading.Tasks;
+
 namespace Wafer.Uwp;
 
 public sealed partial class Shell : UserControl
@@ -27,7 +29,7 @@ public sealed partial class Shell : UserControl
         };
     }
 
-    private  async void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+    private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
     {
         if (NavigationItems.FirstOrDefault(item => item.Item == args.InvokedItemContainer) is ItemEntry entity)
         {
@@ -35,9 +37,8 @@ public sealed partial class Shell : UserControl
         }
         else
         {
-            maindialog.Title = "Errors";
-            maindialog.Content = args.InvokedItemContainer.Content+" is no actions";
-            await maindialog.ShowAsync();
+            infobar.IsOpen = true;
+            infobar.Message = args.InvokedItemContainer.Content + " is no acctions";
         }
     }
 }

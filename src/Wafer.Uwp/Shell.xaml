@@ -67,12 +67,12 @@
                         <NavigationViewItem Content="重新初始化" Icon="Delete"/>
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
+                <InfoBar x:Name="infobar" IsOpen="False"/>
             </NavigationView.MenuItems>
             <!--frame content-->
             <NavigationView.Content>
                 <Frame x:Name="NavigationFrame"/>
             </NavigationView.Content>
         </NavigationView>
-        <ContentDialog x:Name="maindialog" CloseButtonText="Close"/>
     </Grid>
 </UserControl>
